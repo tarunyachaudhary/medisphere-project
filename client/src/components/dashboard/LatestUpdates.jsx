@@ -10,21 +10,21 @@ const gradients = [
 
 export default function LatestUpdates() {
   return (
-    <div className="rounded-2xl border border-slate-100 bg-white p-5 card-shadow">
+    <div className="rounded-xl border border-slate-100 bg-white p-4 card-shadow">
       <div className="flex items-center justify-between">
         <p className="text-[15px] font-bold text-slate-900">Latest Updates</p>
         <button className="text-xs font-semibold text-indigo-600">View All</button>
       </div>
 
-      <ul className="mt-4 space-y-3.5">
+      <ul className="mt-3 space-y-3">
         {updates.map((u, i) => (
           <li key={u.id} className="flex items-center gap-3">
             <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${gradients[i % gradients.length]} text-white`}>
               <Newspaper size={16} />
             </span>
             <span className="min-w-0">
-              <span className="block truncate text-sm font-semibold text-slate-800">{u.title}</span>
-              <span className="block text-xs text-slate-400">{u.date}</span>
+              <span className="block truncate text-xs font-semibold text-slate-800">{u.title}</span>
+              <span className="block text-[11px] text-slate-400">{u.date}</span>
             </span>
           </li>
         ))}

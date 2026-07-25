@@ -57,10 +57,10 @@ export default function Footer() {
           <p className="text-sm font-bold text-white">Contact Us</p>
           <ul className="mt-4 space-y-3 text-sm text-slate-400">
             <li className="flex items-start gap-2">
-              <Phone size={15} className="mt-0.5 shrink-0" /> +91 98765 43210
+              <Phone size={15} className="mt-0.5 shrink-0" /> +91 91516 41222
             </li>
             <li className="flex items-start gap-2">
-              <Mail size={15} className="mt-0.5 shrink-0" /> info@medbridge.in
+              <Mail size={15} className="mt-0.5 shrink-0" /> medisphereconnect@gmail.com
             </li>
             <li className="flex items-start gap-2">
               <MapPin size={15} className="mt-0.5 shrink-0" /> Connaught Place, New Delhi, India
@@ -70,7 +70,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10 px-6 py-5 text-center text-xs text-slate-500">
-        © 2025 MedBridge. All rights reserved.
+        © 2025 Medisphere. All rights reserved.
       </div>
     </footer>
   );

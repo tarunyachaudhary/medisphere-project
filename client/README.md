@@ -1,4 +1,4 @@
-# MedBridge - Study MBBS in Russia
+# Medisphere - Study MBBS in Russia
 
 A React + Vite + Tailwind CSS website with two parts:
 

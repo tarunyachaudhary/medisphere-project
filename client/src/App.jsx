@@ -3,10 +3,16 @@ import RootLayout from "./layouts/RootLayout";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Placeholder from "./pages/Placeholder";
+import Universities from "./pages/Universities";
+import Profile from "./pages/Profile";
+import Applications from "./pages/Applications";
+import Shortlist from "./pages/Shortlist";
+import Counselling from "./pages/Counselling";
+import Payments from "./pages/Payments";
+import AdminDashboard from "./pages/AdminDashboard";
 
 const marketingRoutes = [
   "about-russia",
-  "universities",
   "fees",
   "process",
   "services",
@@ -15,12 +21,7 @@ const marketingRoutes = [
 ];
 
 const dashboardRoutes = [
-  "profile",
-  "applications",
   "documents",
-  "shortlist",
-  "counselling",
-  "payments",
   "visa",
   "travel",
   "edit-profile",
@@ -30,7 +31,6 @@ const dashboardRoutes = [
   "guides",
   "faqs",
   "blog",
-  "admin",
   "admin/users",
   "admin/universities",
   "admin/applications",
@@ -45,6 +45,13 @@ export default function App() {
     <Routes>
       <Route element={<RootLayout />}>
         <Route path="/" element={<Home />} />
+        <Route path="/universities" element={<Universities />} />
+        <Route path="/dashboard/profile" element={<Profile />} />
+        <Route path="/dashboard/applications" element={<Applications />} />
+        <Route path="/dashboard/shortlist" element={<Shortlist />} />
+        <Route path="/dashboard/counselling" element={<Counselling />} />
+        <Route path="/dashboard/payments" element={<Payments />} />
+        <Route path="/dashboard/admin" element={<AdminDashboard />} />
 
         {marketingRoutes.map((path) => (
           <Route key={path} path={`/${path}`} element={<Placeholder />} />

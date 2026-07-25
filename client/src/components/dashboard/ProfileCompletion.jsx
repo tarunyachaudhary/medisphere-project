@@ -6,10 +6,10 @@ export default function ProfileCompletion() {
   const percent = Math.round((done / profileChecklist.length) * 100);
 
   return (
-    <div className="rounded-2xl border border-slate-100 bg-white p-5 card-shadow">
+    <div className="rounded-xl border border-slate-100 bg-white p-4 card-shadow">
       <div className="flex items-center justify-between">
         <p className="text-[15px] font-bold text-slate-900">Profile Completion</p>
-        <span className="text-sm font-bold text-indigo-600">{percent}% Completed</span>
+        <span className="text-xs font-bold text-indigo-600">{percent}% Completed</span>
       </div>
 
       <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-slate-100">
@@ -21,7 +21,7 @@ export default function ProfileCompletion() {
 
       <ul className="mt-4 space-y-2.5">
         {profileChecklist.map((item) => (
-          <li key={item.label} className="flex items-center gap-2.5 text-sm">
+          <li key={item.label} className="flex items-center gap-2.5 text-xs">
             {item.done ? (
               <CheckCircle2 size={17} className="shrink-0 text-emerald-500" />
             ) : (

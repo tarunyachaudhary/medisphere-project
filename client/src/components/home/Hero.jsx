@@ -1,6 +1,13 @@
-import { ShieldCheck, Wallet, ClipboardCheck, MessageCircle, Star } from "lucide-react";
+import {
+  ShieldCheck,
+  Wallet,
+  ClipboardCheck,
+  MessageCircle,
+  Star,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import BookingForm from "./BookingForm";
+import HeroBackground from "./HeroBackground";
 
 const highlights = [
   { icon: ShieldCheck, label: "NMC Approved", sub: "Universities" },
@@ -11,7 +18,8 @@ const highlights = [
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-indigo-50 via-white to-white">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 py-14 lg:grid-cols-[1.15fr_0.85fr] lg:py-20">
+      <HeroBackground />
+      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 py-14 lg:grid-cols-[1.15fr_0.85fr] lg:py-20">
         <div>
           <span className="inline-block rounded-full bg-indigo-100 px-3.5 py-1.5 text-xs font-semibold text-indigo-600">
             Dream Big. We Make It Happen.
@@ -22,8 +30,8 @@ export default function Hero() {
           </h1>
 
           <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-slate-500">
-            Your journey to become a doctor starts here. Affordable fees, world-class education,
-            bright future.
+            Your journey to become a doctor starts here. Affordable fees,
+            world-class education, bright future.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
@@ -36,7 +44,9 @@ export default function Hero() {
                   <h.icon size={16} />
                 </span>
                 <span className="text-xs leading-tight">
-                  <span className="block font-semibold text-slate-800">{h.label}</span>
+                  <span className="block font-semibold text-slate-800">
+                    {h.label}
+                  </span>
                   <span className="block text-slate-400">{h.sub}</span>
                 </span>
               </div>
@@ -51,7 +61,7 @@ export default function Hero() {
               Book Free Counselling
             </a>
             <a
-              href="https://wa.me/919876543210"
+              href="https://wa.me/919151641222"
               target="_blank"
               rel="noreferrer"
               className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-emerald-300 hover:text-emerald-600"
@@ -61,25 +71,17 @@ export default function Hero() {
             </a>
           </div>
 
-          <div className="mt-8 flex items-center gap-4">
-            <div className="flex -space-x-3">
-              {["from-indigo-400 to-indigo-600", "from-rose-400 to-rose-600", "from-emerald-400 to-emerald-600"].map(
-                (g, i) => (
-                  <span
-                    key={i}
-                    className={`h-9 w-9 rounded-full border-2 border-white bg-gradient-to-br ${g}`}
-                  />
-                )
-              )}
-            </div>
-            <p className="text-sm font-medium text-slate-600">10,000+ Students Already Enrolled</p>
-          </div>
-
           <div className="mt-2 flex items-center gap-1.5">
             {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} size={15} className="fill-amber-400 text-amber-400" />
+              <Star
+                key={i}
+                size={15}
+                className="fill-amber-400 text-amber-400"
+              />
             ))}
-            <span className="ml-1 text-sm font-semibold text-slate-700">4.9/5</span>
+            <span className="ml-1 text-sm font-semibold text-slate-700">
+              4.9/5
+            </span>
             <span className="text-sm text-slate-400">(1200+ Reviews)</span>
           </div>
         </div>

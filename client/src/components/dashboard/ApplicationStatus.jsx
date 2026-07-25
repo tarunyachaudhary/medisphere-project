@@ -34,23 +34,23 @@ function StepTracker({ step }) {
 
 export default function ApplicationStatus() {
   return (
-    <div className="rounded-2xl border border-slate-100 bg-white p-5 card-shadow">
+    <div className="rounded-xl border border-slate-100 bg-white p-4 card-shadow">
       <div className="flex items-center justify-between">
         <p className="text-[15px] font-bold text-slate-900">Application Status</p>
         <button className="text-xs font-semibold text-indigo-600">View All</button>
       </div>
 
-      <div className="mt-4 space-y-5">
+      <div className="mt-3 space-y-3">
         {applications.map((app) => (
-          <div key={app.id} className="rounded-xl border border-slate-100 p-4">
+          <div key={app.id} className="rounded-lg border border-slate-100 p-3">
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-center gap-3">
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-blue-600 text-white">
                   <Building2 size={18} />
                 </span>
                 <div>
-                  <p className="text-sm font-bold text-slate-900">{app.university}</p>
-                  <p className="text-xs text-slate-400">{app.city}</p>
+                  <p className="text-xs font-bold text-slate-900">{app.university}</p>
+                  <p className="text-[11px] text-slate-400">{app.city}</p>
                   <p className="mt-0.5 text-[11px] text-slate-400">Applied on: {app.appliedOn}</p>
                 </div>
               </div>

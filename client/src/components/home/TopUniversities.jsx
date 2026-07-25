@@ -1,16 +1,9 @@
-import { useRef } from "react";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { universities } from "../../data/universities";
 import UniversityCard from "./UniversityCard";
 
 export default function TopUniversities() {
-  const scrollerRef = useRef(null);
-
-  const scroll = (dir) => {
-    scrollerRef.current?.scrollBy({ left: dir * 280, behavior: "smooth" });
-  };
-
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
       <div className="flex items-end justify-between">
@@ -29,31 +22,10 @@ export default function TopUniversities() {
         </Link>
       </div>
 
-      <div className="relative mt-8">
-        <button
-          onClick={() => scroll(-1)}
-          className="absolute -left-4 top-1/2 z-10 hidden -translate-y-1/2 rounded-full border border-slate-200 bg-white p-2 shadow-md lg:flex"
-          aria-label="Scroll left"
-        >
-          <ChevronLeft size={18} />
-        </button>
-
-        <div
-          ref={scrollerRef}
-          className="flex gap-5 overflow-x-auto pb-3 snap-x snap-mandatory scroll-px-6"
-        >
-          {universities.map((uni) => (
+      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          {universities.slice(0, 5).map((uni) => (
             <UniversityCard key={uni.id} uni={uni} />
           ))}
-        </div>
-
-        <button
-          onClick={() => scroll(1)}
-          className="absolute -right-4 top-1/2 z-10 hidden -translate-y-1/2 rounded-full border border-slate-200 bg-white p-2 shadow-md lg:flex"
-          aria-label="Scroll right"
-        >
-          <ChevronRight size={18} />
-        </button>
       </div>
     </section>
   );

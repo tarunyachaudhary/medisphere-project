@@ -3,7 +3,8 @@ import { createContext, useContext, useState } from "react";
 const SidebarContext = createContext(null);
 
 export function SidebarProvider({ children }) {
-  const [collapsed, setCollapsed] = useState(false);
+  // Keep navigation closed until the visitor explicitly opens it.
+  const [collapsed, setCollapsed] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const toggleCollapsed = () => setCollapsed((prev) => !prev);

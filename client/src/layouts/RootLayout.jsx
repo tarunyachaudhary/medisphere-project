@@ -7,13 +7,16 @@ import { SidebarProvider } from "../context/SidebarContext";
 export default function RootLayout() {
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen flex-col bg-surface">
+      <div className="min-h-screen bg-[#f6f7fb] flex flex-col">
         <TopBar />
+
         <div className="flex flex-1">
           <Sidebar />
-          <div className="flex min-h-screen flex-1 flex-col overflow-x-hidden">
+
+          <div className="flex flex-1 flex-col overflow-hidden">
             <DashboardTopbar />
-            <main className="flex-1">
+
+            <main className="flex-1 min-w-0">
               <Outlet />
             </main>
           </div>

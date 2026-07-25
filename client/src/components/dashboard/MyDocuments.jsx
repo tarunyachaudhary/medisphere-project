@@ -8,13 +8,13 @@ const statusStyle = {
 
 export default function MyDocuments() {
   return (
-    <div className="rounded-2xl border border-slate-100 bg-white p-5 card-shadow">
+    <div className="rounded-xl border border-slate-100 bg-white p-4 card-shadow">
       <div className="flex items-center justify-between">
         <p className="text-[15px] font-bold text-slate-900">My Documents</p>
         <button className="text-xs font-semibold text-indigo-600">View All</button>
       </div>
 
-      <ul className="mt-4 space-y-3">
+      <ul className="mt-3 space-y-2.5">
         {documents.map((doc) => (
           <li key={doc.id} className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-3 overflow-hidden">

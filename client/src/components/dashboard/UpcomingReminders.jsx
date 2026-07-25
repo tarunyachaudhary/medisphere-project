@@ -6,13 +6,13 @@ const colors = ["bg-indigo-50 text-indigo-600", "bg-pink-50 text-pink-600", "bg-
 
 export default function UpcomingReminders() {
   return (
-    <div className="rounded-2xl border border-slate-100 bg-white p-5 card-shadow">
+    <div className="rounded-xl border border-slate-100 bg-white p-4 card-shadow">
       <div className="flex items-center justify-between">
         <p className="text-[15px] font-bold text-slate-900">Upcoming Reminders</p>
         <button className="text-xs font-semibold text-indigo-600">View All</button>
       </div>
 
-      <ul className="mt-4 space-y-3.5">
+      <ul className="mt-3 space-y-3">
         {reminders.map((r, i) => {
           const Icon = icons[i % icons.length];
           return (
@@ -21,8 +21,8 @@ export default function UpcomingReminders() {
                 <Icon size={16} />
               </span>
               <span>
-                <span className="block text-sm font-semibold text-slate-800">{r.title}</span>
-                <span className="block text-xs text-slate-400">{r.date}</span>
+                <span className="block text-xs font-semibold text-slate-800">{r.title}</span>
+                <span className="block text-[11px] text-slate-400">{r.date}</span>
               </span>
             </li>
           );

@@ -11,7 +11,7 @@ const actions = [
 
 export default function QuickActions() {
   return (
-    <div className="rounded-2xl border border-slate-100 bg-white p-5 card-shadow">
+    <div className="rounded-xl border border-slate-100 bg-white p-4 card-shadow">
       <div className="flex items-center justify-between">
         <p className="text-[15px] font-bold text-slate-900">Quick Actions</p>
         <button className="flex items-center gap-1 text-xs font-semibold text-indigo-600">
@@ -19,18 +19,18 @@ export default function QuickActions() {
         </button>
       </div>
 
-      <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+      <div className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
         {actions.map((a) => (
           <button
             key={a.title}
-            className="flex items-center gap-3 rounded-xl border border-slate-100 p-3.5 text-left transition hover:border-indigo-200 hover:bg-indigo-50/40"
+            className="flex items-center gap-3 rounded-lg border border-slate-100 p-3 text-left transition hover:border-indigo-200 hover:bg-indigo-50/40"
           >
             <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${a.color}`}>
               <a.icon size={18} />
             </span>
             <span>
-              <span className="block text-sm font-semibold text-slate-800">{a.title}</span>
-              <span className="block text-xs text-slate-400">{a.desc}</span>
+              <span className="block text-xs font-semibold text-slate-800">{a.title}</span>
+              <span className="block text-[10px] text-slate-400">{a.desc}</span>
             </span>
           </button>
         ))}

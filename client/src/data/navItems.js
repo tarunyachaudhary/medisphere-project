@@ -28,6 +28,14 @@ import {
   Phone,
 } from "lucide-react";
 
+export const topNav = [
+  { label: "Home", path: "/" },
+  { label: "Universities", path: "/universities" },
+  { label: "Process", path: "/process" },
+  { label: "Blog", path: "/blog" },
+  { label: "Contact", path: "/contact" },
+];
+
 export const mainNav = [
   { label: "Home", icon: Home, path: "/" },
   { label: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
