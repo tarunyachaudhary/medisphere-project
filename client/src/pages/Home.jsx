@@ -5,6 +5,7 @@ import TopUniversities from "../components/home/TopUniversities";
 import ProcessSteps from "../components/home/ProcessSteps";
 import CtaBanner from "../components/home/CtaBanner";
 import Footer from "../components/home/Footer";
+import LeadCapture from "../components/home/LeadCapture";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <TrustBadges />
       <StatsBar />
       <TopUniversities />
+      <LeadCapture/>
       <ProcessSteps />
       <CtaBanner />
       <Footer />

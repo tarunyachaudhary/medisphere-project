@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   ShieldCheck,
   Wallet,
@@ -5,9 +6,9 @@ import {
   MessageCircle,
   Star,
 } from "lucide-react";
-import { Link } from "react-router-dom";
 import BookingForm from "./BookingForm";
 import HeroBackground from "./HeroBackground";
+import CounsellingBookingModal from "./CounsellingBooking";
 
 const highlights = [
   { icon: ShieldCheck, label: "NMC Approved", sub: "Universities" },
@@ -16,9 +17,12 @@ const highlights = [
 ];
 
 export default function Hero() {
+  const [isCounsellingOpen, setIsCounsellingOpen] = useState(false);
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-indigo-50 via-white to-white">
       <HeroBackground />
+
       <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 py-14 lg:grid-cols-[1.15fr_0.85fr] lg:py-20">
         <div>
           <span className="inline-block rounded-full bg-indigo-100 px-3.5 py-1.5 text-xs font-semibold text-indigo-600">
@@ -35,31 +39,40 @@ export default function Hero() {
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            {highlights.map((h) => (
-              <div
-                key={h.label}
-                className="flex items-center gap-2.5 rounded-xl border border-slate-100 bg-white px-3.5 py-2.5 card-shadow"
-              >
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-50 text-indigo-600">
-                  <h.icon size={16} />
-                </span>
-                <span className="text-xs leading-tight">
-                  <span className="block font-semibold text-slate-800">
-                    {h.label}
+            {highlights.map((highlight) => {
+              const Icon = highlight.icon;
+
+              return (
+                <div
+                  key={highlight.label}
+                  className="flex items-center gap-2.5 rounded-xl border border-slate-100 bg-white px-3.5 py-2.5 card-shadow"
+                >
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-50 text-indigo-600">
+                    <Icon size={16} />
                   </span>
-                  <span className="block text-slate-400">{h.sub}</span>
-                </span>
-              </div>
-            ))}
+
+                  <span className="text-xs leading-tight">
+                    <span className="block font-semibold text-slate-800">
+                      {highlight.label}
+                    </span>
+                    <span className="block text-slate-400">
+                      {highlight.sub}
+                    </span>
+                  </span>
+                </div>
+              );
+            })}
           </div>
 
           <div className="mt-7 flex flex-wrap gap-3">
-            <a
-              href="#booking-form"
+            <button
+              type="button"
+              onClick={() => setIsCounsellingOpen(true)}
               className="rounded-lg bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-sm shadow-indigo-200 transition hover:bg-indigo-700"
             >
               Book Free Counselling
-            </a>
+            </button>
+
             <a
               href="https://wa.me/919151641222"
               target="_blank"
@@ -72,17 +85,18 @@ export default function Hero() {
           </div>
 
           <div className="mt-2 flex items-center gap-1.5">
-            {Array.from({ length: 5 }).map((_, i) => (
+            {Array.from({ length: 5 }).map((_, index) => (
               <Star
-                key={i}
+                key={index}
                 size={15}
                 className="fill-amber-400 text-amber-400"
               />
             ))}
+
             <span className="ml-1 text-sm font-semibold text-slate-700">
               4.9/5
             </span>
-            <span className="text-sm text-slate-400">(1200+ Reviews)</span>
+            <span className="text-sm text-slate-400">(1000+ Reviews)</span>
           </div>
         </div>
 
@@ -90,6 +104,11 @@ export default function Hero() {
           <BookingForm />
         </div>
       </div>
+
+      <CounsellingBookingModal
+        isOpen={isCounsellingOpen}
+        onClose={() => setIsCounsellingOpen(false)}
+      />
     </section>
   );
 }

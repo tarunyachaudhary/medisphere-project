@@ -23,7 +23,7 @@ export default function TopUniversities() {
       </div>
 
       <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-          {universities.slice(0, 5).map((uni) => (
+          {universities.slice(0, 10).map((uni) => (
             <UniversityCard key={uni.id} uni={uni} />
           ))}
       </div>

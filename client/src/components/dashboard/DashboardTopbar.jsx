@@ -35,13 +35,13 @@ export default function DashboardTopbar() {
     <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white/95 px-5 backdrop-blur-md">
       {/* Left */}
       <div className="flex items-center gap-4">
-        <button
+        {/* <button
           onClick={handleSidebarToggle}
           aria-label="Toggle navigation menu"
           className="rounded-xl border border-slate-200 bg-white p-2.5 text-slate-600 shadow-sm transition hover:bg-slate-100 hover:text-indigo-600"
         >
           <Menu size={20} />
-        </button>
+        </button> */}
 
         {/* Show logo only when sidebar is collapsed */}
         {collapsed && (
@@ -77,19 +77,7 @@ export default function DashboardTopbar() {
       </nav>
 
       {/* Right */}
-      <div className="flex items-center gap-3">
-        <button className="relative rounded-xl p-2.5 text-slate-500 transition hover:bg-slate-100">
-          <Bell size={19} />
-
-          <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-red-500" />
-        </button>
-
-        <button className="hidden rounded-xl p-2.5 text-slate-500 transition hover:bg-slate-100 sm:flex">
-          <MessageSquare size={19} />
-        </button>
-
-        <div className="h-8 w-px bg-slate-200" />
-
+      <div className="flex m-5 items-center gap-3">
         {user ? (
           <button className="flex items-center gap-3 rounded-xl px-2 py-1 transition hover:bg-slate-100">
             {user.avatar ? (
@@ -106,8 +94,8 @@ export default function DashboardTopbar() {
             <ChevronDown size={16} className="hidden text-slate-400 md:block" />
           </button>
         ) : (
-          <Link to="/login" className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-indigo-200 transition hover:bg-indigo-700">
-            Login
+          <Link to="/login" className="rounded-lg mr-8 w-[150px] bg-indigo-600 px-8 py-3 text-sm font-bold text-white shadow-sm shadow-indigo-200 transition hover:bg-indigo-700">
+            Login/signup
           </Link>
         )}
       </div>

@@ -7,8 +7,6 @@ import { useSidebar } from "../../context/SidebarContext";
 import {
   mainNav,
   exploreNav,
-  accountNav,
-  resourcesNav,
   adminNav,
 } from "../../data/navItems";
 
@@ -111,19 +109,12 @@ export default function Sidebar() {
           onNavigate={mobile ? closeMobile : undefined}
         />
 
-        <NavSection
-          title="Account"
-          items={accountNav}
-          collapsed={collapsed && !mobile}
-          onNavigate={mobile ? closeMobile : undefined}
-        />
-
-        <NavSection
+        {/* <NavSection
           title="Resources"
           items={resourcesNav}
           collapsed={collapsed && !mobile}
           onNavigate={mobile ? closeMobile : undefined}
-        />
+        /> */}
 
         <NavSection
           title="Admin Panel"

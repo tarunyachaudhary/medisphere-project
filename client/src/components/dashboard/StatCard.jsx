@@ -1,6 +1,6 @@
 export default function StatCard({ icon: Icon, value, label, bg, color }) {
   return (
-    <div className="flex min-h-[94px] items-center justify-between rounded-xl border border-slate-100 bg-white p-4 card-shadow">
+    <div className="flex min-h-[100px] items-center justify-between rounded-xl border border-slate-100 bg-white p-4 card-shadow">
       <div>
         <p className="text-[11px] font-medium text-slate-400">{label}</p>
         <p className="mt-1 text-xl font-extrabold text-slate-900">{value}</p>

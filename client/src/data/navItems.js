@@ -32,7 +32,7 @@ export const topNav = [
   { label: "Home", path: "/" },
   { label: "Universities", path: "/universities" },
   { label: "Process", path: "/process" },
-  { label: "Blog", path: "/blog" },
+  { label: "About us", path: "/about" },
   { label: "Contact", path: "/contact" },
 ];
 
@@ -41,7 +41,6 @@ export const mainNav = [
   { label: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
   { label: "My Profile", icon: User, path: "/dashboard/profile" },
   { label: "Applications", icon: FileText, path: "/dashboard/applications" },
-  { label: "My Documents", icon: Folder, path: "/dashboard/documents" },
   { label: "University Shortlist", icon: GraduationCap, path: "/dashboard/shortlist" },
   { label: "Counselling Sessions", icon: Users, path: "/dashboard/counselling" },
   { label: "Payments", icon: Wallet, path: "/dashboard/payments" },
@@ -50,25 +49,11 @@ export const mainNav = [
 ];
 
 export const exploreNav = [
-  { label: "About Russia", icon: Globe, path: "/about-russia" },
+  { label: "About Russia", icon: Globe, path: "/dashboard/about-russia" },
   { label: "Universities", icon: Building2, path: "/universities" },
-  { label: "Fees", icon: Wallet, path: "/fees" },
   { label: "Process", icon: ClipboardList, path: "/process" },
-  { label: "Services", icon: HelpingHand, path: "/services" },
+  { label: "Services", icon: HelpingHand, path: "/dashboard/services" },
   { label: "Contact", icon: Phone, path: "/contact" },
-];
-
-export const accountNav = [
-  { label: "Edit Profile", icon: UserCog, path: "/dashboard/edit-profile" },
-  { label: "Change Password", icon: Lock, path: "/dashboard/password" },
-  { label: "Notification Settings", icon: Bell, path: "/dashboard/notifications" },
-  { label: "Help & Support", icon: HelpCircle, path: "/dashboard/support" },
-];
-
-export const resourcesNav = [
-  { label: "Guides & Downloads", icon: BookOpen, path: "/dashboard/guides" },
-  { label: "FAQs", icon: HelpingHand, path: "/dashboard/faqs" },
-  { label: "Blog & Updates", icon: Newspaper, path: "/dashboard/blog" },
 ];
 
 export const adminNav = [
@@ -76,8 +61,8 @@ export const adminNav = [
   { label: "Manage Users", icon: UserPlus, path: "/dashboard/admin/users" },
   { label: "Universities", icon: Building2, path: "/dashboard/admin/universities" },
   { label: "All Applications", icon: ClipboardList, path: "/dashboard/admin/applications" },
-  { label: "Counsellor Management", icon: UserCheck, path: "/dashboard/admin/counsellors" },
-  { label: "Payments & Invoices", icon: Receipt, path: "/dashboard/admin/payments" },
-  { label: "Reports & Analytics", icon: BarChart3, path: "/dashboard/admin/reports" },
-  { label: "Settings", icon: Settings, path: "/dashboard/admin/settings" },
+  // { label: "Counsellor Management", icon: UserCheck, path: "/dashboard/admin/counsellors" },
+  // { label: "Payments & Invoices", icon: Receipt, path: "/dashboard/admin/payments" },
+  // { label: "Reports & Analytics", icon: BarChart3, path: "/dashboard/admin/reports" },
+  // { label: "Settings", icon: Settings, path: "/dashboard/admin/settings" },
 ];

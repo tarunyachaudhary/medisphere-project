@@ -1,18 +1,17 @@
 import { GraduationCap, Building2, Users, Trophy } from "lucide-react";
 
 const stats = [
-  { icon: GraduationCap, value: "10,000+", label: "Students Enrolled" },
-  { icon: Building2, value: "25+", label: "Top Universities" },
-  { icon: Users, value: "50+", label: "Expert Counsellors" },
+  { icon: Building2, value: "50+", label: "Top Universities" },
+  { icon: Users, value: "20+", label: "Expert Counsellors" },
   { icon: Trophy, value: "98%+", label: "Visa Success Rate" },
 ];
 
 export default function StatsBar() {
   return (
-    <section className="mx-auto max-w-7xl px-6 -mt-px">
-      <div className="grid grid-cols-2 gap-6 rounded-2xl bg-navy px-8 py-9 sm:grid-cols-4">
+    <section className="mx-auto max-w-4xl px-6 m-5 ">
+      <div className="grid grid-cols-2 gap-10 rounded-2xl bg-navy px-6 py-6 sm:grid-cols-4">
         {stats.map((s) => (
-          <div key={s.label} className="flex items-center gap-3.5">
+          <div key={s.label} className="flex items-center justify-center gap-3.5">
             <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/10 text-white">
               <s.icon size={20} />
             </span>

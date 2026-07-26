@@ -11,8 +11,8 @@ export default function Logo({ showText = true }) {
       />
       {showText && (
         <span className="leading-tight">
-          <span className="block text-[15px] font-extrabold text-slate-900">Medisphere</span>
-          <span className="block text-[11px] font-medium text-slate-500">YOUR FUTURE.OUR MISSION</span>
+          <span className="block text-[15px] font-extrabold text-xl text-slate-900">Medisphere</span>
+          <span className="block text-[11px] font-medium text-gray-600">YOUR FUTURE.OUR MISSION</span>
         </span>
       )}
     </Link>
