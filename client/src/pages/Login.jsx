@@ -10,21 +10,14 @@ import {
   signInWithPhoneNumber,
   signInWithPopup,
 } from "firebase/auth";
-// import { auth } from "../firebase/auth";
+
+import { auth } from "../firebase/auth";
 
 function GoogleIcon() {
   return (
     <span className="text-2xl font-black tracking-[-5px]">
       <span className="text-[#4285F4]">G</span>
     </span>
-  );
-}
-
-function AppleIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-6 w-6 fill-current">
-      <path d="M17.05 12.54c-.03-2.7 2.2-4.02 2.3-4.08-1.25-1.83-3.2-2.08-3.89-2.1-1.65-.17-3.23.97-4.07.97-.85 0-2.15-.95-3.53-.93-1.82.03-3.5 1.06-4.43 2.7-1.9 3.29-.48 8.14 1.35 10.78.9 1.29 1.96 2.74 3.36 2.69 1.34-.05 1.85-.87 3.47-.87 1.62 0 2.08.87 3.5.84 1.45-.03 2.36-1.3 3.25-2.59 1.02-1.49 1.45-2.93 1.47-3-.03-.01-2.82-1.08-2.85-4.41ZM14.48 4.66c.74-.9 1.24-2.16 1.1-3.41-1.07.04-2.37.71-3.14 1.61-.69.8-1.28 2.08-1.12 3.31 1.19.09 2.41-.6 3.16-1.51Z" />
-    </svg>
   );
 }
 
@@ -42,7 +35,7 @@ export default function Login({ onClose = () => window.history.back() }) {
 
   const finishLogin = (user) => {
     console.log("Logged in user:", user);
-    window.location.assign("/dashboard"); // Change this route if needed.
+    window.location.assign("/dashboard");
   };
 
   // Completes passwordless email-link sign-in after the user opens the email.
@@ -89,25 +82,7 @@ export default function Login({ onClose = () => window.history.back() }) {
       setLoading(false);
     }
   };
-
-  const handleApple = async () => {
-    setError("");
-    setLoading(true);
-
-    try {
-      const provider = new OAuthProvider("apple.com");
-      provider.addScope("email");
-      provider.addScope("name");
-
-      const result = await signInWithPopup(auth, provider);
-      finishLogin(result.user);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  
   const handleEmail = async (event) => {
     event.preventDefault();
     setError("");
@@ -134,42 +109,56 @@ export default function Login({ onClose = () => window.history.back() }) {
     }
   };
 
-  const handlePhone = async (event) => {
-    event.preventDefault();
-    setError("");
+ const handlePhone = async (event) => {
+   event.preventDefault();
+   setError("");
 
-    if (!phone.startsWith("+")) {
-      setError("Use international format, for example +919876543210.");
-      return;
-    }
+   // Remove spaces and dashes
+   const cleanedPhone = phone.replace(/[\s-]/g, "");
 
-    setLoading(true);
+   let formattedPhone = "";
 
-    try {
-      if (!recaptchaRef.current) {
-        recaptchaRef.current = new RecaptchaVerifier(
-          auth,
-          "recaptcha-container",
-          { size: "invisible" },
-        );
-      }
+   // Accept 10-digit Indian number
+   if (/^[6-9]\d{9}$/.test(cleanedPhone)) {
+     formattedPhone = `+91${cleanedPhone}`;
+   }
+   // Accept +91XXXXXXXXXX
+   else if (/^\+91[6-9]\d{9}$/.test(cleanedPhone)) {
+     formattedPhone = cleanedPhone;
+   } else {
+     setError("Please enter a valid 10-digit Indian mobile number.");
+     return;
+   }
 
-      const result = await signInWithPhoneNumber(
-        auth,
-        phone,
-        recaptchaRef.current,
-      );
+   setLoading(true);
 
-      setConfirmation(result);
-      setMessage(`Verification code sent to ${phone}.`);
-    } catch (err) {
-      setError(err.message);
-      recaptchaRef.current?.clear();
-      recaptchaRef.current = null;
-    } finally {
-      setLoading(false);
-    }
-  };
+   try {
+     if (!recaptchaRef.current) {
+       recaptchaRef.current = new RecaptchaVerifier(
+         auth,
+         "recaptcha-container",
+         {
+           size: "invisible",
+         },
+       );
+     }
+
+     const result = await signInWithPhoneNumber(
+       auth,
+       formattedPhone,
+       recaptchaRef.current,
+     );
+
+     setConfirmation(result);
+     setMessage(`Verification code sent to ${formattedPhone}.`);
+   } catch (err) {
+     setError(err.message);
+     recaptchaRef.current?.clear();
+     recaptchaRef.current = null;
+   } finally {
+     setLoading(false);
+   }
+ };
 
   const verifyOtp = async (event) => {
     event.preventDefault();
@@ -244,16 +233,6 @@ return (
 
             <button
               type="button"
-              onClick={handleApple}
-              disabled={loading}
-              className="flex h-16 w-full items-center justify-center gap-5 rounded-full border border-white/30 bg-white/10 text-[18px] font-semibold text-white shadow-lg shadow-black/10 backdrop-blur-md transition hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              <AppleIcon />
-              Continue with Apple
-            </button>
-
-            <button
-              type="button"
               onClick={() => {
                 setMode("phone");
                 setMessage("");
@@ -294,13 +273,25 @@ return (
 
             {!confirmation ? (
               <>
-                <input
-                  type="tel"
-                  value={phone}
-                  onChange={(event) => setPhone(event.target.value)}
-                  placeholder="Phone number, e.g. +919876543210"
-                  className="h-16 w-full rounded-full border border-white/30 bg-white/10 px-5 text-[17px] text-white outline-none backdrop-blur-md transition placeholder:text-white/50 focus:border-white/70 focus:bg-white/15"
-                />
+                <div className="flex h-16 overflow-hidden rounded-full border border-white/30 bg-white/10 backdrop-blur-md transition focus-within:border-white/70 focus-within:bg-white/15">
+                  <div className="flex items-center border-r border-white/20 px-5 text-lg font-semibold text-white">
+                    🇮🇳 +91
+                  </div>
+
+                  <input
+                    type="tel"
+                    inputMode="numeric"
+                    value={phone}
+                    onChange={(event) =>
+                      setPhone(
+                        event.target.value.replace(/\D/g, "").slice(0, 10),
+                      )
+                    }
+                    placeholder="9876543210"
+                    maxLength={10}
+                    className="h-full w-full bg-transparent px-5 text-[17px] text-white outline-none placeholder:text-white/50"
+                  />
+                </div>
 
                 <button
                   type="submit"
