@@ -19,6 +19,7 @@ import Login from "./pages/Login";
 import ManageUsers from "./pages/ManageUsers";
 import ManageUniversities from "./pages/ManageUniversities";
 import ManageAllApplications from "./pages/ManageAllApplications";
+import UniversityDetails from "./pages/UniversityDetails";
 
 const marketingRoutes = ["fees", "services", "About us", "contact"];
 
@@ -58,6 +59,7 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard/admin/users" element={<ManageUsers />} />
+         <Route path="/universities/:id" element={<UniversityDetails />} />
         <Route
           path="/dashboard/admin/universities"
           element={<ManageUniversities />}
@@ -66,6 +68,7 @@ export default function App() {
           path="/dashboard/admin/applications"
           element={<ManageAllApplications />}
         />
+
 
         {marketingRoutes.map((path) => (
           <Route key={path} path={`/${path}`} element={<Placeholder />} />

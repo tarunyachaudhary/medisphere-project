@@ -8,11 +8,16 @@ export default function TopUniversities() {
     <section className="mx-auto max-w-7xl px-6 py-16">
       <div className="flex items-end justify-between">
         <div>
-          <p className="text-xs font-bold uppercase tracking-wide text-indigo-600">Top Universities</p>
+          <p className="text-xs font-bold uppercase tracking-wide text-indigo-600">
+            Top Universities
+          </p>
           <h2 className="mt-1.5 text-2xl font-extrabold text-slate-900 sm:text-3xl">
-            Top <span className="text-indigo-600">NMC Approved</span> Universities in Russia
+            Top <span className="text-indigo-600">NMC Approved</span>{" "}
+            Universities in Russia
           </h2>
-          <p className="mt-1.5 text-sm text-slate-500">Choose from Russia's best medical universities</p>
+          <p className="mt-1.5 text-sm text-slate-500">
+            Choose from Russia's best medical universities
+          </p>
         </div>
         <Link
           to="/universities"
@@ -23,9 +28,9 @@ export default function TopUniversities() {
       </div>
 
       <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-          {universities.slice(0, 10).map((uni) => (
-            <UniversityCard key={uni.id} uni={uni} />
-          ))}
+        {universities.slice(0, 10).map((uni) => (
+          <UniversityCard key={uni.id} uni={uni} />
+        ))}
       </div>
     </section>
   );

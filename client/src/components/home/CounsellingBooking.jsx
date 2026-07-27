@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Calendar,
   CheckCircle2,
@@ -48,16 +48,89 @@ export default function CounsellingBookingModal({ isOpen, onClose }) {
     onClose();
   };
 
+  // Lock page scroll while the modal is open, without losing scroll
+  // position. Toggling `overflow: hidden` on/off can snap the page back
+  // to the top in some browsers, so instead we freeze the body in place
+  // with `position: fixed` and explicitly restore the exact scroll
+  // position when the modal closes.
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const scrollY = window.scrollY;
+    const { style } = document.body;
+
+    style.position = "fixed";
+    style.top = `-${scrollY}px`;
+    style.left = "0";
+    style.right = "0";
+    style.width = "100%";
+
+    return () => {
+      style.position = "";
+      style.top = "";
+      style.left = "";
+      style.right = "";
+      style.width = "";
+
+      // Force an instant jump back to the saved position, overriding any
+      // global `scroll-behavior: smooth` CSS — otherwise the browser
+      // animates from the top down to scrollY, which looks like the page
+      // "jumps to the header, then auto-scrolls back down".
+      const html = document.documentElement;
+      const previousScrollBehavior = html.style.scrollBehavior;
+      html.style.scrollBehavior = "auto";
+      window.scrollTo(0, scrollY);
+      html.style.scrollBehavior = previousScrollBehavior;
+    };
+  }, [isOpen]);
+
+  // Close on Escape
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKey = (event) => {
+      if (event.key === "Escape") {
+        setSubmitted(false);
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center overflow-y-auto bg-slate-950/55 p-4 backdrop-blur-sm">
-      <div className="relative my-auto w-full max-w-[760px] overflow-hidden rounded-2xl bg-white shadow-2xl">
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center overflow-y-auto bg-slate-950/55 p-4 backdrop-blur-sm animate-[fadeIn_0.2s_ease-out]"
+      onClick={closeModal}
+    >
+      <div
+        onClick={(event) => event.stopPropagation()}
+        className="counselling-modal-card relative my-auto w-full max-w-[760px] max-h-[96vh] overflow-y-auto rounded-2xl border border-white/60 bg-white/80 shadow-2xl shadow-indigo-950/20 backdrop-blur-2xl animate-[popIn_0.25s_cubic-bezier(0.34,1.56,0.64,1)]"
+      >
+        <style>{`
+          @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+          }
+          @keyframes popIn {
+            from { opacity: 0; transform: scale(0.94) translateY(12px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+          }
+          .counselling-modal-card {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+          }
+          .counselling-modal-card::-webkit-scrollbar {
+            display: none;
+          }
+        `}</style>
+
         <button
           type="button"
           onClick={closeModal}
           aria-label="Close counselling modal"
-          className="absolute right-4 top-4 z-10 rounded-lg p-2 text-slate-500 transition hover:bg-slate-100 hover:text-slate-950"
+          className="absolute right-4 top-4 z-10 rounded-lg bg-white/60 p-2 text-slate-500 backdrop-blur transition hover:bg-white/90 hover:text-slate-950"
         >
           <X size={21} />
         </button>
@@ -67,7 +140,7 @@ export default function CounsellingBookingModal({ isOpen, onClose }) {
             {/* Booking form */}
             <section className="p-7 sm:p-8">
               <div className="flex items-start gap-4 pr-8">
-                <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-violet-100 to-indigo-50 text-indigo-600">
+                <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-600 text-white shadow-lg shadow-indigo-600/30">
                   <Calendar size={27} />
                 </div>
 
@@ -100,7 +173,7 @@ export default function CounsellingBookingModal({ isOpen, onClose }) {
                         updateField("name", event.target.value)
                       }
                       placeholder="Enter your full name"
-                      className="h-10 w-full rounded-lg border border-slate-200 py-2 pl-10 pr-3 text-xs text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                      className="h-10 w-full rounded-lg border border-slate-200 bg-white/70 py-2 pl-10 pr-3 text-xs text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-100"
                     />
                   </div>
                 </label>
@@ -123,7 +196,7 @@ export default function CounsellingBookingModal({ isOpen, onClose }) {
                         updateField("email", event.target.value)
                       }
                       placeholder="Enter your email address"
-                      className="h-10 w-full rounded-lg border border-slate-200 py-2 pl-10 pr-3 text-xs text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                      className="h-10 w-full rounded-lg border border-slate-200 bg-white/70 py-2 pl-10 pr-3 text-xs text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-100"
                     />
                   </div>
                 </label>
@@ -146,7 +219,7 @@ export default function CounsellingBookingModal({ isOpen, onClose }) {
                         updateField("phone", event.target.value)
                       }
                       placeholder="Enter your phone number"
-                      className="h-10 w-full rounded-lg border border-slate-200 py-2 pl-10 pr-3 text-xs text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                      className="h-10 w-full rounded-lg border border-slate-200 bg-white/70 py-2 pl-10 pr-3 text-xs text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-100"
                     />
                   </div>
                 </label>
@@ -163,7 +236,7 @@ export default function CounsellingBookingModal({ isOpen, onClose }) {
                       onChange={(event) =>
                         updateField("course", event.target.value)
                       }
-                      className="h-10 w-full appearance-none rounded-lg border border-slate-200 bg-white px-3 pr-9 text-xs text-slate-600 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                      className="h-10 w-full appearance-none rounded-lg border border-slate-200 bg-white/70 px-3 pr-9 text-xs text-slate-600 outline-none transition focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-100"
                     >
                       <option value="">Select a course</option>
                       {courses.map((course) => (
@@ -190,7 +263,7 @@ export default function CounsellingBookingModal({ isOpen, onClose }) {
                       onChange={(event) =>
                         updateField("country", event.target.value)
                       }
-                      className="h-10 w-full appearance-none rounded-lg border border-slate-200 bg-white px-3 pr-9 text-xs text-slate-600 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                      className="h-10 w-full appearance-none rounded-lg border border-slate-200 bg-white/70 px-3 pr-9 text-xs text-slate-600 outline-none transition focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-100"
                     >
                       <option value="">Select a country</option>
                       {countries.map((country) => (
@@ -223,7 +296,7 @@ export default function CounsellingBookingModal({ isOpen, onClose }) {
                         onChange={(event) =>
                           updateField("date", event.target.value)
                         }
-                        className="h-10 w-full rounded-lg border border-slate-200 py-2 pl-9 pr-3 text-xs text-slate-600 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                        className="h-10 w-full rounded-lg border border-slate-200 bg-white/70 py-2 pl-9 pr-3 text-xs text-slate-600 outline-none transition focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-100"
                       />
                     </div>
                   </label>
@@ -245,7 +318,7 @@ export default function CounsellingBookingModal({ isOpen, onClose }) {
                         onChange={(event) =>
                           updateField("time", event.target.value)
                         }
-                        className="h-10 w-full rounded-lg border border-slate-200 py-2 pl-9 pr-3 text-xs text-slate-600 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                        className="h-10 w-full rounded-lg border border-slate-200 bg-white/70 py-2 pl-9 pr-3 text-xs text-slate-600 outline-none transition focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-100"
                       />
                     </div>
                   </label>
@@ -253,7 +326,7 @@ export default function CounsellingBookingModal({ isOpen, onClose }) {
 
                 <button
                   type="submit"
-                  className="mt-2 h-11 w-full rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 text-sm font-bold text-white shadow-lg shadow-indigo-200 transition hover:from-indigo-700 hover:to-violet-700"
+                  className="mt-2 h-11 w-full rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 text-sm font-bold text-white shadow-lg shadow-indigo-200 transition hover:from-indigo-700 hover:to-violet-700 active:scale-[0.99]"
                 >
                   Book Free Counselling
                 </button>
@@ -266,8 +339,8 @@ export default function CounsellingBookingModal({ isOpen, onClose }) {
             </section>
 
             {/* Information panel */}
-            <aside className="m-5 ml-0 hidden rounded-xl bg-gradient-to-b from-violet-50 via-[#fbfbff] to-indigo-50 p-6 lg:block">
-              <div className="grid h-20 w-20 place-items-center rounded-full bg-gradient-to-br from-violet-100 to-indigo-100 text-indigo-600">
+            <aside className="m-5 ml-0 hidden rounded-xl border border-white/50 bg-white/40 p-6 backdrop-blur-xl lg:block">
+              <div className="grid h-20 w-20 place-items-center rounded-full bg-gradient-to-br from-violet-500 to-indigo-600 text-white shadow-lg shadow-indigo-600/30">
                 <Headphones size={39} />
               </div>
 
@@ -277,7 +350,7 @@ export default function CounsellingBookingModal({ isOpen, onClose }) {
 
               <div className="mt-6 space-y-6">
                 <div className="flex gap-3">
-                  <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-violet-100 text-indigo-600">
+                  <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white/70 text-indigo-600">
                     <Phone size={18} />
                   </div>
 
@@ -292,7 +365,7 @@ export default function CounsellingBookingModal({ isOpen, onClose }) {
                 </div>
 
                 <div className="flex gap-3">
-                  <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-violet-100 text-indigo-600">
+                  <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white/70 text-indigo-600">
                     <MessageCircle size={18} />
                   </div>
 
@@ -307,7 +380,7 @@ export default function CounsellingBookingModal({ isOpen, onClose }) {
                 </div>
 
                 <div className="flex gap-3">
-                  <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-violet-100 text-indigo-600">
+                  <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white/70 text-indigo-600">
                     <FileText size={18} />
                   </div>
 
@@ -323,9 +396,7 @@ export default function CounsellingBookingModal({ isOpen, onClose }) {
                 </div>
               </div>
 
-              <div className="mt-7 border-t border-indigo-100 pt-5">
-
-              </div>
+              <div className="mt-7 border-t border-indigo-100 pt-5" />
             </aside>
           </div>
         ) : (

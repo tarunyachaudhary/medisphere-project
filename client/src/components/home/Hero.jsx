@@ -17,7 +17,7 @@ const highlights = [
 ];
 
 export default function Hero() {
-  const [isCounsellingOpen, setIsCounsellingOpen] = useState(false);
+ const [isCounsellingOpen, setIsCounsellingOpen] = useState(false);
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-indigo-50 via-white to-white">
@@ -72,6 +72,11 @@ export default function Hero() {
             >
               Book Free Counselling
             </button>
+
+            <BookingForm
+              isOpen={isCounsellingOpen}
+              onClose={() => setIsCounsellingOpen(false)}
+            />
 
             <a
               href="https://wa.me/919151641222"

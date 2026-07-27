@@ -1,12 +1,20 @@
 import { ChevronsRight, GraduationCap, Award, ScrollText } from "lucide-react";
 import studentImg from "/student-home-img.avif"
+import { useState } from "react";
+import ApplyNowForm from "./ApplyNowForm";
 
 export default function LeadCapture() {
+  const [showForm, setShowForm] = useState(false);
+  
   return (
     <section className="bg-navy m-8">
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 py-16 lg:grid-cols-[0.85fr_1.15fr]">
         <div className="relative mx-auto flex h-60 w-60 shrink-0 items-center justify-center sm:h-72 sm:w-72">
-         <img className="object-cover h-[400px] w-[300px] rounded-xl " src={studentImg} alt="" />
+          <img
+            className="object-cover h-[400px] w-[300px] rounded-xl "
+            src={studentImg}
+            alt=""
+          />
         </div>
 
         <div>
@@ -20,13 +28,16 @@ export default function LeadCapture() {
             university selection to visa processing, so your journey stays
             simple, transparent and stress-free.
           </p>
-          <a
-            href="#booking-form"
-            className="mt-7 inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-navy transition hover:bg-slate-100"
+          <button
+            onClick={() => setShowForm(true)}
+            className="mt-7 cursor-pointer inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-navy transition hover:bg-slate-100"
           >
             Apply Now
             <ChevronsRight size={16} />
-          </a>
+          </button>
+
+          <ApplyNowForm isOpen={showForm} onClose={() => setShowForm(false)} />
+          {showForm && <ApplyNowForm />}
         </div>
       </div>
     </section>
