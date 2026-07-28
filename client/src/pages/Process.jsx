@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   ClipboardList,
   NotebookPen,
@@ -15,6 +16,7 @@ import {
   MessageCircle,
   MapPin,
 } from "lucide-react";
+import CounsellingBookingModal from "../components/home/CounsellingBooking";
 
 const steps = [
   {
@@ -83,6 +85,8 @@ const documents = [
 ];
 
 export default function Process() {
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+
   return (
     <section className="mx-auto max-w-7xl px-6 py-12 sm:py-16">
       {/* Header */}
@@ -176,13 +180,13 @@ export default function Process() {
               Our expert team is here to guide you at every step of your
               journey.
             </p>
-            <a
-              href="#booking-form"
-              className="mt-4 inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm shadow-indigo-200 transition hover:bg-indigo-700"
+            <button
+              onClick={() => setIsBookingOpen(true)}
+              className="cursor-pointer mt-4 inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm shadow-indigo-200 transition hover:bg-indigo-700"
             >
               <MessageCircle size={16} />
               Book a Free Consultation
-            </a>
+            </button>
           </div>
         </div>
 
@@ -192,6 +196,11 @@ export default function Process() {
           <MapPin size={22} className="text-indigo-300" />
         </div>
       </div>
+
+      <CounsellingBookingModal
+        isOpen={isBookingOpen}
+        onClose={() => setIsBookingOpen(false)}
+      />
     </section>
   );
 }

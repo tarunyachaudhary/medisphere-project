@@ -30,18 +30,18 @@ export default function Dashboard() {
         <ProfileCompletion />
       </section>
 
-      <section className="mt-4 grid gap-4 xl:grid-cols-[minmax(0,1fr)_300px]">
+      {/* <section className="mt-4 grid gap-4 xl:grid-cols-[minmax(0,1fr)_300px]">
         <ApplicationStatus />
         <div className="space-y-4">
           <UpcomingReminders />
           <NeedAssistance />
         </div>
-      </section>
+      </section> */}
 
-      <section className="mt-4 grid gap-4 xl:grid-cols-[minmax(0,1fr)_300px]">
+      {/* <section className="mt-4 grid gap-4 xl:grid-cols-[minmax(0,1fr)_300px]">
         <MyDocuments />
         <LatestUpdates />
-      </section>
+      </section> */}
 
       <section className="mt-4 flex flex-col gap-4 rounded-xl bg-gradient-to-r from-indigo-700 via-indigo-600 to-violet-600 px-5 py-4 text-white shadow-lg shadow-indigo-200 sm:flex-row sm:items-center sm:justify-between">
         <div>

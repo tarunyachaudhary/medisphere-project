@@ -175,9 +175,10 @@ export default function Contact() {
                 <div className="space-y-4">
                   <InfoRow icon={MapPin} title="medisphere-Study Abroad">
                     <p>
-                      B-123, Sector 62, Noida,
+                      Noida, Uttar Pradesh,
                       <br />
-                      Uttar Pradesh, India - 201309
+                      
+                      India - 201309
                     </p>
                   </InfoRow>
 

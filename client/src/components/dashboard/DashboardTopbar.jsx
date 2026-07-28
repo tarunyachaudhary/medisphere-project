@@ -35,13 +35,13 @@ export default function DashboardTopbar() {
     <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white/95 px-5 backdrop-blur-md">
       {/* Left */}
       <div className="flex items-center gap-4">
-        {/* <button
+        <button
           onClick={handleSidebarToggle}
           aria-label="Toggle navigation menu"
           className="rounded-xl border border-slate-200 bg-white p-2.5 text-slate-600 shadow-sm transition hover:bg-slate-100 hover:text-indigo-600"
         >
           <Menu size={20} />
-        </button> */}
+        </button>
 
         {/* Show logo only when sidebar is collapsed */}
         {collapsed && (

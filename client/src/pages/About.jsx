@@ -1,5 +1,7 @@
+import { useState } from "react";
 import {
   BadgeCheck,
+  ClipboardList,
   Landmark,
   FileText,
   Globe2,
@@ -7,11 +9,15 @@ import {
   HandHeart,
   Headphones,
   IndianRupee,
+  MapPin,
+  MessageCircle,
+  Plane,
   ShieldCheck,
   Star,
   Users,
   UserRound,
 } from "lucide-react";
+import CounsellingBookingModal from "../components/home/CounsellingBooking";
 
 const stats = [
   {
@@ -84,6 +90,8 @@ function IconCircle({ icon: Icon, className = "" }) {
 }
 
 export default function About() {
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+
   return (
     <main className="min-h-screen bg-slate-50 px-4 py-4 font-sans text-slate-950 md:px-11 md:py-14">
       <div className="mx-auto max-w-[1450px] rounded-2xl bg-white p-7 shadow-sm md:p-12">
@@ -153,7 +161,7 @@ export default function About() {
                   Trusted by 1000+ Students
                 </h3>
                 <p className="mt-1 text-[13px] leading-5 text-slate-500">
-                  Helping students build a brighter future in Russia since 2018.
+                  Helping students build a brighter future in Russia since 2021.
                 </p>
               </div>
             </div>
@@ -205,7 +213,43 @@ export default function About() {
             ))}
           </div>
         </section>
+
+        {/* Need help CTA */}
+        <div className="relative mt-8 flex flex-col items-center gap-6 overflow-hidden rounded-2xl bg-indigo-50 px-8 py-8 sm:flex-row sm:justify-between">
+          <div className="flex flex-col items-center gap-5 text-center sm:flex-row sm:text-left">
+            <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
+              <ClipboardList size={26} className="text-indigo-600" />
+            </span>
+            <div>
+              <p className="text-lg font-extrabold text-slate-900">
+                Need Help with the Process?
+              </p>
+              <p className="mt-1 text-sm text-slate-500">
+                Our expert team is here to guide you at every step of your
+                journey.
+              </p>
+              <button
+                onClick={() => setIsBookingOpen(true)}
+                className="cursor-pointer mt-4 inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm shadow-indigo-200 transition hover:bg-indigo-700"
+              >
+                <MessageCircle size={16} />
+                Book a Free Consultation
+              </button>
+            </div>
+          </div>
+
+          <div className="hidden shrink-0 items-center gap-3 sm:flex">
+            <span className="h-px w-16 border-t-2 border-dashed border-indigo-300" />
+            <Plane size={32} className="-rotate-3 text-indigo-300" />
+            <MapPin size={22} className="text-indigo-300" />
+          </div>
+        </div>
       </div>
+
+      <CounsellingBookingModal
+        isOpen={isBookingOpen}
+        onClose={() => setIsBookingOpen(false)}
+      />
     </main>
   );
 }

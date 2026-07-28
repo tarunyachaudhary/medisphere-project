@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import {
   MapPin,
@@ -15,9 +15,11 @@ import {
   BookOpen,
   Dumbbell,
   IndianRupee,
+  MessageCircle,
 } from "lucide-react";
 import { universities } from "../data/universities";
 import { getUniversityImage } from "../data/getUniversityImage";
+import CounsellingBookingModal from "../components/home/CounsellingBooking";
 
 const QUICK_LINKS = [
   { id: "overview", label: "Overview" },
@@ -153,6 +155,7 @@ function getSimilarUniversities(current, all, count = 3) {
 export default function UniversityDetails() {
   const { id } = useParams();
   const uni = universities.find((u) => String(u.id) === id);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
 
   useLayoutEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
@@ -279,6 +282,25 @@ export default function UniversityDetails() {
                 </li>
               ))}
             </ul>
+          </div>
+
+          {/* Book a consultation */}
+          <div className="mt-10 rounded-2xl h-65 border border-indigo-800 bg-indigo-50 p-4 text-center card-shadow">
+            <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-white card-shadow">
+              <MessageCircle size={18} className="text-indigo-600 object-cover" />
+            </span>
+            <p className="mt-2.5 text-lg font-extrabold text-slate-900">
+              Need Help with Admission?
+            </p>
+            <p className="mt-1 text-[12px] leading-relaxed text-gray-900">
+              Book a free consultation with our counsellors.
+            </p>
+            <button
+              onClick={() => setIsBookingOpen(true)}
+              className="mt-6 w-full cursor-pointer gap-1.5 rounded-lg bg-indigo-600 px-5 py-2 text-sm font-semibold text-white shadow-sm shadow-indigo-200 transition hover:bg-gray-800"
+            >
+              Book Free Consultation
+            </button>
           </div>
         </aside>
 
@@ -594,6 +616,11 @@ export default function UniversityDetails() {
           </section>
         </aside>
       </div>
+
+      <CounsellingBookingModal
+        isOpen={isBookingOpen}
+        onClose={() => setIsBookingOpen(false)}
+      />
     </div>
   );
 }

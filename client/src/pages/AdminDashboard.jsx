@@ -1,27 +1,374 @@
 import {
-  ArrowUp, Bell, CalendarDays, ChevronDown, CircleDollarSign, Eye, FileText,
-  GraduationCap, HandCoins, LayoutDashboard, MessageSquareMore, Search, UsersRound,
+  ArrowUp,
+  Bell,
+  CalendarDays,
+  ChevronDown,
+  CircleDollarSign,
+  Eye,
+  FileText,
+  GraduationCap,
+  HandCoins,
+  LayoutDashboard,
+  MessageSquareMore,
+  Search,
+  UsersRound,
 } from "lucide-react";
 
 const applications = [
-  ["APP-2025-1245", "Rohan Kumar", "MBBS", "Kazan Federal University", "Under Review", "26 May 2025"],
-  ["APP-2025-1244", "Anjali Sharma", "MBBS", "Bashkir State Medical University", "Counselling", "26 May 2025"],
-  ["APP-2025-1243", "Deepak Patel", "MBBS", "Perm State Medical University", "Submitted", "25 May 2025"],
-  ["APP-2025-1242", "Neha Mehta", "MBBS", "Orenburg State Medical University", "Offer Made", "25 May 2025"],
-  ["APP-2025-1241", "Shivam Kumar", "MBBS", "People's Friendship University", "Submitted", "24 May 2025"],
+  [
+    "APP-2025-1245",
+    "Rohan Kumar",
+    "MBBS",
+    "Kazan Federal University",
+    "Under Review",
+    "26 May 2025",
+  ],
+  [
+    "APP-2025-1244",
+    "Anjali Sharma",
+    "MBBS",
+    "Bashkir State Medical University",
+    "Counselling",
+    "26 May 2025",
+  ],
+  [
+    "APP-2025-1243",
+    "Deepak Patel",
+    "MBBS",
+    "Perm State Medical University",
+    "Submitted",
+    "25 May 2025",
+  ],
+  [
+    "APP-2025-1242",
+    "Neha Mehta",
+    "MBBS",
+    "Orenburg State Medical University",
+    "Offer Made",
+    "25 May 2025",
+  ],
+  [
+    "APP-2025-1241",
+    "Shivam Kumar",
+    "MBBS",
+    "People's Friendship University",
+    "Submitted",
+    "24 May 2025",
+  ],
 ];
-const statusStyle = { "Under Review": "bg-amber-50 text-amber-600", Counselling: "bg-sky-50 text-sky-600", Submitted: "bg-violet-50 text-violet-600", "Offer Made": "bg-emerald-50 text-emerald-600" };
-function Kpi({ icon: Icon, title, value, growth, color }) { return <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm shadow-slate-100"><div className="flex items-center gap-3"><span className={`rounded-2xl p-3 ${color}`}><Icon size={21} /></span><div><p className="text-[11px] font-semibold text-slate-600">{title}</p><p className="mt-1 text-2xl font-extrabold text-slate-900">{value}</p><p className="mt-2 flex items-center gap-1 text-[10px] font-semibold text-emerald-600"><ArrowUp size={11} /> {growth} this week</p></div></div></div>; }
-function Panel({ title, action = "View All", children, className = "" }) { return <section className={`rounded-2xl border border-slate-200 bg-white p-4 shadow-sm shadow-slate-100 ${className}`}><div className="mb-4 flex items-center justify-between"><h2 className="text-sm font-bold text-slate-800">{title}</h2>{action && <button className="rounded-lg border border-slate-200 px-3 py-1.5 text-[10px] font-semibold text-indigo-600 hover:bg-indigo-50">{action}</button>}</div>{children}</section>; }
-
-export default function AdminDashboard() {
-  return <div className="mx-auto w-full max-w-[1540px] px-4 py-5 sm:px-6 lg:px-8"><div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between"><div><h1 className="text-2xl font-extrabold tracking-tight text-slate-900">Welcome back, Admin! <span aria-hidden="true">👋</span></h1><p className="mt-1 text-sm text-slate-500">Here's what's happening with your platform today.</p></div><div className="flex flex-col gap-3 sm:flex-row"><label className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-slate-400 shadow-sm"><Search size={15} /><input className="w-48 bg-transparent text-xs text-slate-700 outline-none placeholder:text-slate-400" placeholder="Search here..." /></label><button className="relative rounded-lg border border-slate-200 bg-white p-2.5 text-slate-500 shadow-sm"><Bell size={17} /><span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-rose-500" /></button><button className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs font-semibold text-slate-700 shadow-sm"><CalendarDays size={15} />20 May 2025 - 26 May 2025<ChevronDown size={14} /></button></div></div>
-    <section className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-5"><Kpi icon={UsersRound} title="Total Inquiries" value="2,456" growth="18.7%" color="bg-violet-100 text-violet-600" /><Kpi icon={FileText} title="Total Applications" value="1,324" growth="15.3%" color="bg-sky-50 text-sky-500" /><Kpi icon={GraduationCap} title="Universities Listed" value="48" growth="2" color="bg-emerald-50 text-emerald-500" /><Kpi icon={MessageSquareMore} title="Counselling Sessions" value="235" growth="12.5%" color="bg-amber-50 text-amber-500" /><Kpi icon={CircleDollarSign} title="Total Payments" value="₹ 24,75,000" growth="22.1%" color="bg-rose-50 text-rose-500" /></section>
-    <section className="mt-4 grid gap-4 xl:grid-cols-[1.45fr_.9fr_.85fr]"><Panel title="Applications Overview" action="This Week"><div className="flex gap-4 text-[10px] text-slate-500"><span className="flex items-center gap-1"><i className="h-2 w-2 rounded-full bg-indigo-500" /> Applications</span><span className="flex items-center gap-1"><i className="h-2 w-2 rounded-full bg-slate-300" /> Inquiries</span></div><div className="mt-3 h-44"><svg viewBox="0 0 500 190" className="h-full w-full overflow-visible"><g stroke="#e8eaf1" strokeWidth="1"><path d="M0 20H500M0 65H500M0 110H500M0 155H500" /></g><polyline fill="none" stroke="#4f46e5" strokeWidth="2.5" points="10,114 60,103 110,89 160,103 210,88 260,66 310,37 360,63 410,76 460,90" /><polyline fill="none" stroke="#cbd5e1" strokeWidth="2" points="10,150 60,141 110,135 160,142 210,138 260,122 310,140 360,132 410,141 460,145" />{["10,114","60,103","110,89","160,103","210,88","260,66","310,37","360,63","410,76","460,90"].map((point) => { const [cx, cy] = point.split(","); return <circle key={point} cx={cx} cy={cy} r="3" fill="#4f46e5" />; })}</svg></div><div className="flex justify-between text-[10px] text-slate-500"><span>20 May</span><span>21 May</span><span>22 May</span><span>23 May</span><span>24 May</span><span>25 May</span><span>26 May</span></div></Panel><Panel title="Applications by Status" action=""><div className="flex items-center gap-4"><div className="relative h-36 w-36 shrink-0 rounded-full" style={{ background: "conic-gradient(#4f46e5 0 46%, #f59e0b 46% 73%, #38bdf8 73% 88%, #10b981 88% 96%, #fb7185 96% 100%)" }}><div className="absolute inset-7 flex flex-col items-center justify-center rounded-full bg-white"><b className="text-xl text-slate-800">1,324</b><span className="text-[10px] text-slate-500">Total</span></div></div><div className="space-y-2 text-[10px]">{[["Submitted", "612 (46.2%)", "bg-indigo-500"],["Under Review", "356 (26.9%)", "bg-amber-500"],["Counselling", "198 (15.0%)", "bg-sky-500"],["Offer Made", "102 (7.7%)", "bg-emerald-500"],["Rejected", "56 (4.2%)", "bg-rose-400"]].map(([label, value, color]) => <p key={label} className="flex items-start gap-2"><i className={`mt-1 h-2 w-2 rounded-full ${color}`} /><span><b className="block text-slate-600">{label}</b><span className="text-slate-400">{value}</span></span></p>)}</div></div></Panel><Panel title="Recent Inquiries"><div className="space-y-3">{[["RK","Rohan Kumar","MBBS in Russia","2 min ago"],["AS","Anjali Sharma","Admission Process","10 min ago"],["DP","Deepak Patel","Fee Structure","30 min ago"],["NM","Neha Mehta","Scholarship Details","1 hour ago"],["SK","Shivam Kumar","Document Required","2 hours ago"]].map(([initials,name,topic,time]) => <div key={initials} className="flex gap-2"><span className="flex h-7 w-7 items-center justify-center rounded-full bg-violet-50 text-[10px] font-bold text-violet-600">{initials}</span><div className="min-w-0 flex-1"><p className="text-[11px] font-semibold text-slate-700">{name}</p><p className="text-[10px] text-slate-500">{topic}</p></div><span className="text-[9px] text-slate-400">{time}</span></div>)}</div><button className="mt-4 w-full text-xs font-semibold text-indigo-600">View All Inquiries →</button></Panel></section>
-    <section className="mt-4 grid gap-4 xl:grid-cols-[1.45fr_.85fr]"><Panel title="Latest Applications"><div className="overflow-x-auto"><table className="w-full min-w-[680px] text-left text-[10px]"><thead className="bg-indigo-50/70 uppercase text-slate-500"><tr>{["ID","Student Name","Program","University","Status","Applied On","Action"].map((head) => <th key={head} className="px-2 py-2.5">{head}</th>)}</tr></thead><tbody>{applications.map((app) => <tr key={app[0]} className="border-b border-slate-100 last:border-0"><td className="px-2 py-2.5 font-medium">{app[0]}</td><td className="px-2 py-2.5">{app[1]}</td><td className="px-2 py-2.5">{app[2]}</td><td className="px-2 py-2.5">{app[3]}</td><td className="px-2 py-2.5"><span className={`rounded-full px-2 py-1 font-semibold ${statusStyle[app[4]]}`}>{app[4]}</span></td><td className="px-2 py-2.5">{app[5]}</td><td className="px-2 py-2.5"><button className="rounded bg-slate-100 p-1 text-slate-500"><Eye size={12} /></button></td></tr>)}</tbody></table></div></Panel><Panel title="Payments Summary"><div className="space-y-4">{[[WalletIcon,"Total Payments","₹ 24,75,000","text-emerald-600","bg-sky-50 text-sky-500"],[ClockIcon,"Pending Payments","₹ 5,40,000","text-amber-500","bg-amber-50 text-amber-500"],[HandCoins,"Refunds Processed","₹ 1,20,000","text-sky-600","bg-sky-50 text-sky-500"],[XIcon,"Failed Payments","₹ 25,000","text-rose-600","bg-rose-50 text-rose-500"]].map(([Icon,label,value,valueColor,bg]) => <div key={label} className="flex items-center gap-3"><span className={`rounded-xl p-2 ${bg}`}><Icon size={15} /></span><p className="flex-1 text-xs font-semibold text-slate-600">{label}</p><b className={`text-xs ${valueColor}`}>{value}</b></div>)}</div></Panel></section>
-    <Panel title="Quick Overview" action="" className="mt-4"><div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">{[[UsersRound,"Active Users","1,245"],[GraduationCap,"Total Students","3,578"],[LayoutDashboard,"Countries Covered","12"],[GraduationCap,"Partner Universities","48"],[UsersRound,"Team Members","15"]].map(([Icon,label,value]) => <div key={label} className="flex items-center gap-3"><span className="rounded-xl bg-violet-50 p-2.5 text-violet-600"><Icon size={17} /></span><div><p className="text-[10px] text-slate-500">{label}</p><p className="mt-1 text-sm font-extrabold text-slate-800">{value}</p></div></div>)}</div></Panel></div>;
+const statusStyle = {
+  "Under Review": "bg-amber-50 text-amber-600",
+  Counselling: "bg-sky-50 text-sky-600",
+  Submitted: "bg-violet-50 text-violet-600",
+  "Offer Made": "bg-emerald-50 text-emerald-600",
+};
+function Kpi({ icon: Icon, title, value, growth, color }) {
+  return (
+    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm shadow-slate-100">
+      <div className="flex items-center gap-3">
+        <span className={`rounded-2xl p-3 ${color}`}>
+          <Icon size={21} />
+        </span>
+        <div>
+          <p className="text-[11px] font-semibold text-slate-600">{title}</p>
+          <p className="mt-1 text-2xl font-extrabold text-slate-900">{value}</p>
+          <p className="mt-2 flex items-center gap-1 text-[10px] font-semibold text-emerald-600">
+            <ArrowUp size={11} /> {growth} this week
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+function Panel({ title, action = "View All", children, className = "" }) {
+  return (
+    <section
+      className={`rounded-2xl border border-slate-200 bg-white p-4 shadow-sm shadow-slate-100 ${className}`}
+    >
+      <div className="mb-4 flex items-center justify-between">
+        <h2 className="text-sm font-bold text-slate-800">{title}</h2>
+        {action && (
+          <button className="rounded-lg border border-slate-200 px-3 py-1.5 text-[10px] font-semibold text-indigo-600 hover:bg-indigo-50">
+            {action}
+          </button>
+        )}
+      </div>
+      {children}
+    </section>
+  );
 }
 
-function WalletIcon(props) { return <CircleDollarSign {...props} />; }
-function ClockIcon(props) { return <HandCoins {...props} />; }
-function XIcon(props) { return <CircleDollarSign {...props} />; }
+export default function AdminDashboard() {
+  return (
+    <div className="mx-auto w-full max-w-[1540px] px-4 py-5 sm:px-6 lg:px-8">
+      <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+        <div>
+          <h1 className="text-2xl font-extrabold tracking-tight text-slate-900">
+            Welcome back, Admin! <span aria-hidden="true">👋</span>
+          </h1>
+          <p className="mt-1 text-sm text-slate-500">
+            Here's what's happening with your platform today.
+          </p>
+        </div>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <label className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-slate-400 shadow-sm">
+            <Search size={15} />
+            <input
+              className="w-48 bg-transparent text-xs text-slate-700 outline-none placeholder:text-slate-400"
+              placeholder="Search here..."
+            />
+          </label>
+          <button className="relative rounded-lg border border-slate-200 bg-white p-2.5 text-slate-500 shadow-sm">
+            <Bell size={17} />
+            <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-rose-500" />
+          </button>
+          <button className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs font-semibold text-slate-700 shadow-sm">
+            <CalendarDays size={15} />
+            20 May 2025 - 26 May 2025
+            <ChevronDown size={14} />
+          </button>
+        </div>
+      </div>
+      <section className="mt-6 grid gap-10 sm:grid-cols-2 xl:grid-cols-5">
+        <Kpi
+          icon={UsersRound}
+          title="Total Inquiries"
+          value="2,456"
+          growth="18.7%"
+          color="bg-violet-100 text-violet-600"
+        />
+        <Kpi
+          icon={FileText}
+          title="Total Applications"
+          value="1,324"
+          growth="15.3%"
+          color="bg-sky-50 text-sky-500"
+        />
+        <Kpi
+          icon={GraduationCap}
+          title="Universities Listed"
+          value="48"
+          growth="2"
+          color="bg-emerald-50 text-emerald-500"
+        />
+        <Kpi
+          icon={MessageSquareMore}
+          title="Counselling Sessions"
+          value="235"
+          growth="12.5%"
+          color="bg-amber-50 text-amber-500"
+        />
+        {/* <Kpi
+          icon={CircleDollarSign}
+          title="Total Payments"
+          value="₹ 24,75,000"
+          growth="22.1%"
+          color="bg-rose-50 text-rose-500"
+        /> */}
+      </section>
+      <section className="mt-4 grid gap-4 xl:grid-cols-[1.45fr_.9fr_.85fr]">
+        <Panel title="Applications Overview" action="This Week">
+          <div className="flex gap-4 text-[10px] text-slate-500">
+            <span className="flex items-center gap-1">
+              <i className="h-2 w-2 rounded-full bg-indigo-500" /> Applications
+            </span>
+            <span className="flex items-center gap-1">
+              <i className="h-2 w-2 rounded-full bg-slate-300" /> Inquiries
+            </span>
+          </div>
+          <div className="mt-3 h-44">
+            <svg
+              viewBox="0 0 500 190"
+              className="h-full w-full overflow-visible"
+            >
+              <g stroke="#e8eaf1" strokeWidth="1">
+                <path d="M0 20H500M0 65H500M0 110H500M0 155H500" />
+              </g>
+              <polyline
+                fill="none"
+                stroke="#4f46e5"
+                strokeWidth="2.5"
+                points="10,114 60,103 110,89 160,103 210,88 260,66 310,37 360,63 410,76 460,90"
+              />
+              <polyline
+                fill="none"
+                stroke="#cbd5e1"
+                strokeWidth="2"
+                points="10,150 60,141 110,135 160,142 210,138 260,122 310,140 360,132 410,141 460,145"
+              />
+              {[
+                "10,114",
+                "60,103",
+                "110,89",
+                "160,103",
+                "210,88",
+                "260,66",
+                "310,37",
+                "360,63",
+                "410,76",
+                "460,90",
+              ].map((point) => {
+                const [cx, cy] = point.split(",");
+                return (
+                  <circle key={point} cx={cx} cy={cy} r="3" fill="#4f46e5" />
+                );
+              })}
+            </svg>
+          </div>
+          <div className="flex justify-between text-[10px] text-slate-500">
+            <span>20 May</span>
+            <span>21 May</span>
+            <span>22 May</span>
+            <span>23 May</span>
+            <span>24 May</span>
+            <span>25 May</span>
+            <span>26 May</span>
+          </div>
+        </Panel>
+        <Panel title="Applications by Status" action="">
+          <div className="flex items-center gap-4">
+            <div
+              className="relative h-36 w-36 shrink-0 rounded-full"
+              style={{
+                background:
+                  "conic-gradient(#4f46e5 0 46%, #f59e0b 46% 73%, #38bdf8 73% 88%, #10b981 88% 96%, #fb7185 96% 100%)",
+              }}
+            >
+              <div className="absolute inset-7 flex flex-col items-center justify-center rounded-full bg-white">
+                <b className="text-xl text-slate-800">1,324</b>
+                <span className="text-[10px] text-slate-500">Total</span>
+              </div>
+            </div>
+            <div className="space-y-2 text-[10px]">
+              {[
+                ["Submitted", "612 (46.2%)", "bg-indigo-500"],
+                ["Under Review", "356 (26.9%)", "bg-amber-500"],
+                ["Counselling", "198 (15.0%)", "bg-sky-500"],
+                ["Rejected", "56 (4.2%)", "bg-rose-400"],
+              ].map(([label, value, color]) => (
+                <p key={label} className="flex items-start gap-2">
+                  <i className={`mt-1 h-2 w-2 rounded-full ${color}`} />
+                  <span>
+                    <b className="block text-slate-600">{label}</b>
+                    <span className="text-slate-400">{value}</span>
+                  </span>
+                </p>
+              ))}
+            </div>
+          </div>
+        </Panel>
+        <Panel title="Recent Inquiries">
+          <div className="space-y-3">
+            {[
+              ["RK", "Rohan Kumar", "MBBS in Russia", "2 min ago"],
+              ["AS", "Anjali Sharma", "Admission Process", "10 min ago"],
+              ["DP", "Deepak Patel", "Fee Structure", "30 min ago"],
+              ["NM", "Neha Mehta", "Scholarship Details", "1 hour ago"],
+              ["SK", "Shivam Kumar", "Document Required", "2 hours ago"],
+            ].map(([initials, name, topic, time]) => (
+              <div key={initials} className="flex gap-2">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-violet-50 text-[10px] font-bold text-violet-600">
+                  {initials}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="text-[11px] font-semibold text-slate-700">
+                    {name}
+                  </p>
+                  <p className="text-[10px] text-slate-500">{topic}</p>
+                </div>
+                <span className="text-[9px] text-slate-400">{time}</span>
+              </div>
+            ))}
+          </div>
+          <button className="mt-4 w-full text-xs font-semibold text-indigo-600">
+            View All Inquiries →
+          </button>
+        </Panel>
+      </section>
+      <section className="mt-4 grid gap-4 xl:grid-cols-[1.45fr_.85fr]">
+        <Panel title="Latest Applications">
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[680px] text-left text-[10px]">
+              <thead className="bg-indigo-50/70 uppercase text-slate-500">
+                <tr>
+                  {[
+                    "ID",
+                    "Student Name",
+                    "Program",
+                    "University",
+                    "Status",
+                    "Applied On",
+                    "Action",
+                  ].map((head) => (
+                    <th key={head} className="px-2 py-2.5">
+                      {head}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {applications.map((app) => (
+                  <tr
+                    key={app[0]}
+                    className="border-b border-slate-100 last:border-0"
+                  >
+                    <td className="px-2 py-2.5 font-medium">{app[0]}</td>
+                    <td className="px-2 py-2.5">{app[1]}</td>
+                    <td className="px-2 py-2.5">{app[2]}</td>
+                    <td className="px-2 py-2.5">{app[3]}</td>
+                    <td className="px-2 py-2.5">
+                      <span
+                        className={`rounded-full px-2 py-1 font-semibold ${statusStyle[app[4]]}`}
+                      >
+                        {app[4]}
+                      </span>
+                    </td>
+                    <td className="px-2 py-2.5">{app[5]}</td>
+                    <td className="px-2 py-2.5">
+                      <button className="rounded bg-slate-100 p-1 text-slate-500">
+                        <Eye size={12} />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Panel>
+      </section>
+      <Panel title="Quick Overview" action="" className="mt-4">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+          {[
+            [UsersRound, "Active Users", "1,245"],
+            [GraduationCap, "Total Students", "3,578"],
+            [LayoutDashboard, "Countries Covered", "1"],
+            [GraduationCap, "Partner Universities", "48"],
+            // [UsersRound, "Team Members", "5"],
+          ].map(([Icon, label, value]) => (
+            <div key={label} className="flex items-center gap-3">
+              <span className="rounded-xl bg-violet-50 p-2.5 text-violet-600">
+                <Icon size={17} />
+              </span>
+              <div>
+                <p className="text-[10px] text-slate-500">{label}</p>
+                <p className="mt-1 text-sm font-extrabold text-slate-800">
+                  {value}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Panel>
+    </div>
+  );
+}
+
+function WalletIcon(props) {
+  return <CircleDollarSign {...props} />;
+}
+function ClockIcon(props) {
+  return <HandCoins {...props} />;
+}
+function XIcon(props) {
+  return <CircleDollarSign {...props} />;
+}

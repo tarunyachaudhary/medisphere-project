@@ -48,11 +48,6 @@ export default function CounsellingBookingModal({ isOpen, onClose }) {
     onClose();
   };
 
-  // Lock page scroll while the modal is open, without losing scroll
-  // position. Toggling `overflow: hidden` on/off can snap the page back
-  // to the top in some browsers, so instead we freeze the body in place
-  // with `position: fixed` and explicitly restore the exact scroll
-  // position when the modal closes.
   useEffect(() => {
     if (!isOpen) return;
 
